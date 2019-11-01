@@ -11,4 +11,4 @@
 |
 */
 
-Route::post('pour', 'LagouController@pour');
+Route::post('pour', 'LagouController@pour')->middleware('cors');
