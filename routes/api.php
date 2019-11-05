@@ -11,4 +11,6 @@
 |
 */
 
+Route::get('uibot/jobs', 'UiBotController@jobUrls');
+
 Route::post('pour', 'LagouController@pour')->middleware('cors');
