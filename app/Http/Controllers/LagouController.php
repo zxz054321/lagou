@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\LagouPosition;
-use Illuminate\Http\Request;
 
 class LagouController extends Controller
 {
-    public function pour(Request $request)
+    public function pour()
     {
         $data = json_decode(file_get_contents('php://input'));
 
