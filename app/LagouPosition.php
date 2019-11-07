@@ -12,6 +12,7 @@ class LagouPosition extends Model
 
     protected $fillable = [
         'positionId',
+        'positionCategory',
         'positionName',
         'companyId',
         'companyFullName',

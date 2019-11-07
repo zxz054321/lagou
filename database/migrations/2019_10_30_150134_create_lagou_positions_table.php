@@ -15,6 +15,7 @@ class CreateLagouPositionsTable extends Migration
     {
         Schema::create('lagou_positions', function (Blueprint $table) {
             $table->bigIncrements('positionId');
+            $table->string('positionCategory')->nullable(); // 本应用补充的字段
             $table->string('positionName')->nullable();
             $table->string('companyId')->nullable();
             $table->string('companyFullName')->nullable();
