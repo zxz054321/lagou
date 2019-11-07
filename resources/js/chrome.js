@@ -91,7 +91,3 @@ function crawl() {
         crawl();
     });
 }
-
-// 先去最后一页
-randomSleep(_ => simulate($(".item_con_pager .pager_not_current").last().get(0), "click"));
-crawl();
