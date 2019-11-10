@@ -82,8 +82,10 @@ function randomSleep(fn) {
 
 function crawl() {
     // 到达第一页后停止
-    if (1 === $('.pager_is_current').attr('page'))
+    if (1 === $('.pager_is_current').attr('page')) {
+        document.title = 'uibot:finished';
         return;
+    }
 
     // 往上一页走
     randomSleep(_ => {
