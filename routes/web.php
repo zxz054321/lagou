@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('uibot/chrome.js', 'UiBotController@chromeScript');
+Route::get('uibot/chrome.script', 'UiBotController@chromeScript');
