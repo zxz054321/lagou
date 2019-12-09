@@ -12,30 +12,12 @@
 通过 https://lagou.air-soft.cn/api/uibot/jobs 接口可获得已处理好的拉勾职位目录页 url，在 Chrome 浏览器中跳转到相应页面之后，打开 DevTools 执行以下 JavaScript 代码，以注入爬虫代码：
 
 ```javascript
-// 引入 Ajax Hook
-var script = document.createElement('script');
-script.src = "https://unpkg.com/ajax-hook/dist/ajaxhook.min.js";
-document.getElementsByTagName('head')[0].appendChild(script);
-
-// 引入 Chrome 浏览器爬虫
 var script = document.createElement('script');
 script.src = "https://lagou.air-soft.cn/uibot/chrome.js";
 document.getElementsByTagName('head')[0].appendChild(script);
 ```
 
-在 DevTools 执行以下 JavaScript 代码以运行爬虫：
-
-```javascript
-randomSleep(_ => {
-    // 先去最后一页
-    simulate($(".item_con_pager .pager_not_current").last().get(0), "click");
-
-    // 开始爬取
-    crawl();
-});
-```
-
-爬虫运行流程：
+js 文件加载完后，爬虫会自动运行。爬虫运行流程：
 
 1. 首先跳转最后一页
 2. 从最后一页开始往第一页爬

@@ -28,6 +28,7 @@ class LagouController extends Controller
                 LagouPosition::updateOrCreate(['positionId' => $position->positionId], (array) $position);
 
             } catch (QueryException $e) {
+                // 忽略并发插入报错
                 if (Str::contains($e->getMessage(), 'Duplicate entry')) {
                     return;
                 }

@@ -1,3 +1,5 @@
+window.ajaxHook = require('ajax-hook');
+
 /**
  * 模拟鼠标点击 ================================================================================
  */
@@ -57,19 +59,17 @@ var defaultOptions = {
     cancelable: true
 };
 
-
 /**
  * 拦截XHR响应 ================================================================================
  */
-hookAjax({
+ajaxHook.hookAjax({
     onreadystatechange: function (xhr) {
         if (-1 === xhr.responseURL.indexOf('positionAjax.json'))
             return;
 
-        $.post("{{url('api/lagou/pour')}}", xhr.responseText);
+        $.post('{{url(\'api/lagou/pour\')}}', xhr.responseText);
     },
 });
-
 
 /**
  * 开始慢慢爬 ==================================================================================
@@ -83,13 +83,21 @@ function randomSleep(fn) {
 function crawl() {
     // 到达第一页后停止
     if (1 === $('.pager_is_current').attr('page')) {
-        document.title = 'uibot:finished';
+        console.log('爬取完成');
         return;
     }
 
     // 往上一页走
     randomSleep(_ => {
-        simulate($(".pager_prev ").last().get(0), "click");
+        simulate($('.pager_prev ').last().get(0), 'click');
         crawl();
     });
 }
+
+randomSleep(_ => {
+    // 先去最后一页
+    simulate($('.item_con_pager .pager_not_current').last().get(0), 'click');
+
+    // 开始爬取
+    crawl();
+});
