@@ -21,19 +21,19 @@ class LagouDataController extends Controller
 
         foreach ($data->content->positionResult->result as $position) {
             $position->positionCategory = strtolower($matches[1]);
-            $position->updateTime       = now();
+            $position->updateTime = now();
 
             try {
 
                 LagouPosition::updateOrCreate(['positionId' => $position->positionId], (array) $position);
 
-            } catch (QueryException $e) {
-                // 忽略并发插入报错
-                if (Str::contains($e->getMessage(), 'Duplicate entry')) {
+            } catch (QueryException $exception) {
+                // 忽略同一瞬间同时插入报错
+                if (Str::contains($exception->getMessage(), 'Duplicate entry')) {
                     return;
                 }
 
-                throw $e;
+                throw $exception;
             }
         }
     }
