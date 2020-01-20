@@ -9,11 +9,18 @@
 
 ## 基于 Chrome 浏览器爬取
 
-通过 https://lagou.air-soft.cn/api/uibot/jobs 接口可获得已处理好的拉勾职位目录页 url，在 Chrome 浏览器中跳转到相应页面之后，打开 DevTools 执行以下 JavaScript 代码，以注入爬虫代码：
+首先安装 Laravel Mix 相关依赖，编译浏览器爬虫脚本：
+
+```bash
+npm install
+npm run production
+```
+
+通过 https://lagou.air-soft.cn/api/lagou-job-pages 接口可获得已处理好的拉勾职位目录页 url，在 Chrome 浏览器中跳转到相应页面之后，打开 DevTools 执行以下 JavaScript 代码，以注入爬虫代码：
 
 ```javascript
 var script = document.createElement('script');
-script.src = "https://lagou.air-soft.cn/uibot/chrome.js";
+script.src = "https://lagou.air-soft.cn/js/chrome.js";
 document.getElementsByTagName('head')[0].appendChild(script);
 ```
 

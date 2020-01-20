@@ -67,7 +67,7 @@ ajaxHook.hookAjax({
         if (-1 === xhr.responseURL.indexOf('positionAjax.json'))
             return;
 
-        $.post('{{url(\'api/lagou/pour\')}}', xhr.responseText);
+        $.post(process.env.MIX_APP_URL + '/api/pour', xhr.responseText);
     },
 });
 

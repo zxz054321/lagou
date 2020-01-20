@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class LagouController extends Controller
+class LagouDataController extends Controller
 {
     public function pour(Request $request)
     {
