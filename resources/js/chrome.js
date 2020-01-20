@@ -3,9 +3,30 @@ window.ajaxHook = require('ajax-hook');
 /**
  * 模拟鼠标点击 ================================================================================
  */
+function extend(destination, source) {
+    for (var property in source)
+        destination[property] = source[property];
+    return destination;
+}
+
 function simulate(element, eventName) {
-    var options = extend(defaultOptions, arguments[2] || {});
-    var oEvent, eventType = null;
+    const eventMatchers = {
+        'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
+        'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
+    };
+
+    let oEvent, eventType = null;
+    let options = extend({
+        pointerX: 0,
+        pointerY: 0,
+        button: 0,
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        metaKey: false,
+        bubbles: true,
+        cancelable: true
+    }, arguments[2] || {});
 
     for (var name in eventMatchers) {
         if (eventMatchers[name].test(eventName)) {
@@ -37,28 +58,6 @@ function simulate(element, eventName) {
     return element;
 }
 
-function extend(destination, source) {
-    for (var property in source)
-        destination[property] = source[property];
-    return destination;
-}
-
-var eventMatchers = {
-    'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
-    'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
-};
-var defaultOptions = {
-    pointerX: 0,
-    pointerY: 0,
-    button: 0,
-    ctrlKey: false,
-    altKey: false,
-    shiftKey: false,
-    metaKey: false,
-    bubbles: true,
-    cancelable: true
-};
-
 /**
  * 拦截XHR响应 ================================================================================
  */
@@ -82,7 +81,7 @@ function randomSleep(fn) {
 
 function crawl() {
     // 到达第一页后停止
-    if (1 === $('.pager_is_current').attr('page')) {
+    if (1 == $('.pager_is_current').attr('page')) {
         console.log('爬取完成');
         return;
     }

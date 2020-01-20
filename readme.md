@@ -7,6 +7,12 @@
 
 
 
+## 部署脚本
+
+项目根目录下的 deploy.sh 用于在 [OneinStack](https://oneinstack.com/) 环境下进行代码一键更新、部署，适用于生产环境
+
+
+
 ## 基于 Chrome 浏览器爬取
 
 首先安装 Laravel Mix 相关依赖，编译浏览器爬虫脚本：
@@ -33,9 +39,3 @@ js 文件加载完后，爬虫会自动运行。爬虫运行流程：
 爬虫禁忌：
 
 - 请不要调短爬虫休息时间，会导致被封
-
-
-
-## 部署脚本
-
-项目根目录下的 deploy.sh 用于在 [OneinStack](https://oneinstack.com/) 环境下进行代码一键更新、部署，适用于生产环境
