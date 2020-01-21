@@ -3,13 +3,13 @@ window.ajaxHook = require('ajax-hook');
 /**
  * 模拟鼠标点击 ================================================================================
  */
-function extend(destination, source) {
-    for (var property in source)
-        destination[property] = source[property];
-    return destination;
-}
-
 function simulate(element, eventName) {
+    function extend(destination, source) {
+        for (var property in source)
+            destination[property] = source[property];
+        return destination;
+    }
+
     const eventMatchers = {
         'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
         'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
@@ -74,29 +74,28 @@ ajaxHook.hookAjax({
  * 开始慢慢爬 ==================================================================================
  */
 function randomSleep(fn) {
-    let timeout = 5 * 1000 + Math.random() * 20 * 1000;
+    const timeout = 5 * 1000 + Math.random() * 20 * 1000;
     console.log(`随机休息${timeout}s`);
     setTimeout(fn, timeout);
 }
 
 function crawl() {
-    // 到达第一页后停止
     if (1 == $('.pager_is_current').attr('page')) {
-        console.log('爬取完成');
+        console.log('已到达第一页，爬取完成');
         return;
     }
 
-    // 往上一页走
     randomSleep(_ => {
+        console.log('往上一页走');
         simulate($('.pager_prev ').last().get(0), 'click');
         crawl();
     });
 }
 
 randomSleep(_ => {
-    // 先去最后一页
+    console.log('先去最后一页');
     simulate($('.item_con_pager .pager_not_current').last().get(0), 'click');
 
-    // 开始爬取
+    console.log('开始爬取');
     crawl();
 });
