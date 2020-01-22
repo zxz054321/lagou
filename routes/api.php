@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('lagou-job-pages', 'BrowserSpiderController@jobPages');
+Route::get('lagou-job-pages', 'BrowserSpiderController@jobPages')->middleware('cors');
 
 Route::post('pour', 'LagouDataController@pour')->middleware('cors');

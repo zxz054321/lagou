@@ -11,4 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/chrome.js', 'public/js');
+mix
+    .js('resources/js/spider.js', 'public/js')
+    .js('resources/js/chrome.js', 'public/js');

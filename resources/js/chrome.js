@@ -81,6 +81,7 @@ function randomSleep(fn) {
 
 function crawl() {
     if (1 == $('.pager_is_current').attr('page')) {
+        document.title = '爬取完成。';
         console.log('已到达第一页，爬取完成');
         return;
     }
@@ -93,6 +94,8 @@ function crawl() {
 }
 
 randomSleep(_ => {
+    document.title = '正在爬取……';
+
     console.log('先去最后一页');
     simulate($('.item_con_pager .pager_not_current').last().get(0), 'click');
 
