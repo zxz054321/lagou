@@ -80,9 +80,17 @@ function randomSleep(fn) {
 }
 
 function crawl() {
-    if (1 == $('.pager_is_current').attr('page')) {
+    const currentPage = $('.pager_is_current').attr('page');
+
+    if (1 == currentPage) {
         document.title = '爬取完成。';
         console.log('已到达第一页，爬取完成');
+        return;
+    }
+
+    if (undefined === currentPage) {
+        document.title = '爬取完成。';
+        console.log('此职位只有一页，爬取完成');
         return;
     }
 
@@ -96,8 +104,19 @@ function crawl() {
 randomSleep(_ => {
     document.title = '正在爬取……';
 
-    console.log('先去最后一页');
-    simulate($('.item_con_pager .pager_not_current').last().get(0), 'click');
+    const lastPage = $('.item_con_pager .pager_not_current').last().get(0);
+
+    if (lastPage) {
+        console.log('先去最后一页');
+        simulate(lastPage, 'click');
+    } else {
+        console.log('此职位只有一页');
+        $.post('https://www.lagou.com/jobs/positionAjax.json?' + window.global.queryParamStr, {
+            first: true,
+            pn: 1,
+            kd: window.global.keyword,
+        });
+    }
 
     console.log('开始爬取');
     crawl();
