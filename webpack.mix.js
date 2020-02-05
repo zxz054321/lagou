@@ -12,5 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix
+    .js('resources/js/app.js', 'public/js')
     .js('resources/js/spider.js', 'public/js')
-    .js('resources/js/chrome.js', 'public/js');
+    .js('resources/js/chrome.js', 'public/js')
+    .disableNotifications();
+
+if (!mix.inProduction())
+    mix.sourceMaps().browserSync({
+        proxy: 'lagou.test',
+        open: false
+    });
