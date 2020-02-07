@@ -28,7 +28,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'medium' });
 
 const app = new Vue({
     el: '#app',

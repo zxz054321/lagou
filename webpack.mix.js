@@ -15,6 +15,7 @@ mix
     .js('resources/js/app.js', 'public/js')
     .js('resources/js/spider.js', 'public/js')
     .js('resources/js/chrome.js', 'public/js')
+    .extract(['lodash', 'axios', 'vue', 'element-ui'])
     .disableNotifications();
 
 if (!mix.inProduction())
